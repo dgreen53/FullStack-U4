@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @total_count = @products.count
+    @average_price = (@products.map {|p| p[:price]}.reduce(:+))/@total_count
+    @total_inv = @products.map {|p| p[:stock_quantity]}.reduce(:+)
   end
 
   # GET /products/1
